@@ -1,12 +1,16 @@
 package br.com.jpm.faculdade.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +24,17 @@ public class Disciplina {
     @Column(nullable = false)
     private List<Curso> cursos;
 
+    public Disciplina(String nome, int cargaHoraria) {
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    @Override
+    public String toString() {
+        return "Disciplina{" +
+                "cargaHoraria=" + cargaHoraria +
+                ", nome='" + nome + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
