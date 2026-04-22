@@ -10,6 +10,7 @@ import br.com.jpm.faculdade.repository.DisciplinaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,4 +52,22 @@ public class DisciplinaService {
         Disciplina disciplina = DisciplinaFactory.dtoToEntityConstructorDisciplina(dto, curso);
         return repository.save(disciplina);
     }
+    public void delete(Long id){
+        Disciplina disciplina = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Não é possivel deletar essa disciplina: Disciplina não encontrada!"));
+        repository.delete(disciplina);
+    }
+    @Transactional
+    public DisciplinaResponseDTO update(DisciplinaRequestDTO dto){
+        if (dto.getDisciplinaId() == null){
+            throw new RuntimeException("É necessario o ID da disciplina para fazer a atualização");
+        }
+        Disciplina disciplina = repository.findById(dto.getDisciplinaId())
+                .orElseThrow(() -> new RuntimeException("Disciplina não encontrada!"));
+        DisciplinaFactory.updateEntity(disciplina, dto);
+        Disciplina disciplinaUpdate = repository.save(disciplina);
+        return DisciplinaFactory.entityToResponse(disciplinaUpdate);
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package br.com.jpm.faculdade.model.dto.request;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +12,9 @@ import lombok.*;
 @NoArgsConstructor
 
 public class DisciplinaRequestDTO {
+
+    @Nullable
+    private Long disciplinaId;
 
     @NotNull(message = "Para criar uma Disciplina é necessário passar um Curso")
     private Long cursoId;

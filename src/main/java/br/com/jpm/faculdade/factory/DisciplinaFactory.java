@@ -92,5 +92,9 @@ public class DisciplinaFactory {
 
         return disciplinasDTO;
     }
+    public static void updateEntity(Disciplina disciplina, DisciplinaRequestDTO dto){
+        disciplina.setNome(dto.getNome());
+        disciplina.setCargaHoraria(dto.getCargaHoraria());
+    }
 
 }

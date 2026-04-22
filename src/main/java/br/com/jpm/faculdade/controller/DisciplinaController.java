@@ -7,6 +7,7 @@ import br.com.jpm.faculdade.model.entity.Disciplina;
 import br.com.jpm.faculdade.service.DisciplinaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +39,20 @@ public class DisciplinaController {
         DisciplinaResponseDTO response = DisciplinaFactory.entityToResponse(disciplinaSalva);
         return ResponseEntity.ok(response);
     }
+    /**
+     * DELETE
+     */
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        disciplinaService.delete(id);
+    }
+    @PutMapping("/{disciplinaId}")
+    public ResponseEntity<DisciplinaResponseDTO> update(@RequestBody DisciplinaRequestDTO dto){
+        return ResponseEntity.ok(disciplinaService.update(dto));
+    }
+
+
 
 }

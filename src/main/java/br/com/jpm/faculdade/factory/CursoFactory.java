@@ -61,4 +61,9 @@ public class CursoFactory {
         return responseDto;
 
     }
+    public static void updateEntity(Curso curso, CursoRequestDTO dto){
+        curso.setNome(dto.getNome());
+        curso.setCodigo(dto.getCodigo());
+        curso.setDuracao(dto.getDuracao());
+    }
 }
